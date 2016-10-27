@@ -8,7 +8,7 @@ Pasos
 
 1. Descárgate el cliente de github si no lo tienes en tu equipo. Créate una cuenta y loguéate.
 
-2. Has un fork de este repositorio. Un Fork se utiliza para modificar el trabajo de otras personas sin que trabajemos sobre su proyecto. En este caso mi repositorio es público, cualquiera puede acceder a él y crearse un repositorio a partir del mismo. El único que puede modificar este repositorio sin crearse una reéplica (un fork) soy yo.
+2. Has un fork de este repositorio. Un Fork se utiliza para modificar el trabajo de otras personas sin que trabajemos sobre su proyecto. En este caso mi repositorio es público, cualquiera puede acceder a él y crearse un repositorio a partir del mismo. El único que puede modificar este repositorio sin crearse una réplica (un fork) soy yo.
 
 3. Una vez has creado un fork de tu repositorio, importa ese repositorio en local para tu máquina. Utiliza el cliente de GitHub. Sobre esa copia será sobre la que trabajes
 
