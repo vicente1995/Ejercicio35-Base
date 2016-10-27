@@ -76,7 +76,7 @@ public class ControlJuego {
 	/**
 	 * Método que checkea si se ha terminado el juego porque se han abierto todas las casillas.
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
-	 */
+	 **/
 	public boolean esFinJuego(){
 	}
 	
