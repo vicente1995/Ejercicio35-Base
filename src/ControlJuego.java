@@ -55,7 +55,7 @@ public class ControlJuego {
 	 * @param i: posición verticalmente de la casilla a rellenar
 	 * @param j: posición horizontalmente de la casilla a rellenar
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
-	 */
+	 **/
 	private int calculoMinasAdjuntas(int i, int j){
 
 	}
