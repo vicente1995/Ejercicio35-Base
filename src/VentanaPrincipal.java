@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -157,6 +158,16 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
 		//TODO
+		//Consulto el numero de minas de una celda
+		int minasAlrededor = juego.getMinasAlrededor(i, j);
+		//Cambio el boton por un JLabel
+		panelesJuego[i][j].removeAll();
+		JLabel pantallaMinsAlrededor = new JLabel("" +minasAlrededor);
+		pantallaMinsAlrededor.setForeground(correspondenciaColores[minasAlrededor]);
+		pantallaMinsAlrededor.setHorizontalAlignment(SwingConstants.CENTER);
+		panelesJuego[i][j].add(pantallaMinsAlrededor);
+		
+		refrescarPantalla();
 	}
 	
 	
@@ -167,6 +178,10 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
 		//TODO
+		
+		if(porExplosion==true){
+			JOptionPane.showConfirmDialog(null, "GAME OVER!!!, \n¿Desea seguir jugando?", null, JOptionPane.YES_NO_OPTION);
+		}
 	}
 
 	/**
@@ -174,6 +189,7 @@ public class VentanaPrincipal {
 	 */
 	public void actualizarPuntuacion() {
 		//TODO
+		pantallaPuntuacion.setText("" + juego.getPuntuacion());
 	}
 	
 	/**

@@ -35,15 +35,46 @@ public class ControlJuego {
 	 * 			El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida(){
-		//Borro del tablero la información que pudiera haber anteriormente (los pongo todos a cero):
+		//Borro del tablero la información que pudiera haber anteriormente (los pongo todos a cero):	
+		for (int i = 0; i <tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+				tablero[i][j]=0;
+			}
+		}
 
 		//Me creo LADO_TABLERO*LADO_TABLERO números en un array list, uno para cada una de las posiciones del tablero:
+		ArrayList<Integer> posiciones = new ArrayList<>();
+		for (int i = 0; i < (LADO_TABLERO*LADO_TABLERO); i++) {
+			posiciones.add(i);
+		}
+
 
 		//Saco 20 posiciones sin repetir del array y les coloco una mina en el tablero:
+		Random rd = new Random();
+		
+		for (int i = 0; i < MINAS_INICIALES; i++) {
+			int iPosElegida=rd.nextInt(posiciones.size());
+			int posElegida=posiciones.get(iPosElegida);
+			posiciones.remove(iPosElegida);
+			
+			//Meto una mina en esa posicion:
+			tablero[posElegida/LADO_TABLERO][posElegida%LADO_TABLERO]=MINA;
+		}
 
 		//Calculo para todas las posiciones que no tienen minas, cuántas minas hay alrededor.
 		
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+				if(tablero[i][j] != MINA){
+					tablero[i][j]=calculoMinasAdjuntas(i, j);
+				}
+			}
+		}
+		
 		//Pongo la puntuación a cero:
+		
+		puntuacion=0;
+		depurarTablero();
 
 		
 	}
@@ -55,9 +86,25 @@ public class ControlJuego {
 	 * @param i: posición verticalmente de la casilla a rellenar
 	 * @param j: posición horizontalmente de la casilla a rellenar
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
-	 **/
+	 */
 	private int calculoMinasAdjuntas(int i, int j){
-
+		int iInicial = Math.max(0, i-1);
+		int iFinal = Math.min(LADO_TABLERO-1, i+1);
+		int jInicial = Math.max(0, j-1);
+		int jFinal = Math.min(LADO_TABLERO-1, j+1);
+		
+		int acumuladorMinas=0;
+		
+		for (int indI= iInicial; indI <= iFinal; indI++) {
+			for (int indJ= jInicial; indJ <= jFinal; indJ++) {
+				if(tablero[indI][indJ]==MINA){
+					acumuladorMinas++;
+				}
+			}
+		}
+			
+		return acumuladorMinas;
+		
 	}
 	
 	/**
@@ -68,7 +115,12 @@ public class ControlJuego {
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
 	public boolean abrirCasilla(int i, int j){
-
+		if(tablero[i][j]==MINA){
+			return false;
+		}
+		
+		puntuacion++;
+		return true;
 	}
 	
 	
@@ -78,6 +130,7 @@ public class ControlJuego {
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
 	 **/
 	public boolean esFinJuego(){
+		return puntuacion==LADO_TABLERO*LADO_TABLERO-MINAS_INICIALES;
 	}
 	
 	
@@ -92,7 +145,7 @@ public class ControlJuego {
 			}
 			System.out.println();
 		}
-		System.out.println("\nPuntuación: "+puntuacion);
+		System.out.println("\nPuntuaci�n: "+puntuacion);
 	}
 
 	/**
@@ -103,6 +156,7 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 	public int getMinasAlrededor(int i, int j) {
+		return tablero[i][j];
 	}
 
 	/**
@@ -110,6 +164,7 @@ public class ControlJuego {
 	 * @return Un entero con la puntuación actual
 	 */
 	public int getPuntuacion() {
+		return puntuacion;
 	}
 	
 }
